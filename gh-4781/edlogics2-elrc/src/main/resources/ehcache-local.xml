@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="ehcache.xsd"
+		updateCheck="false" monitoring="autodetect"
+		dynamicConfig="false" maxBytesLocalHeap="300M">
+	<!-- Property values at http://ehcache.org/ehcache.xml -->
+	<diskStore path="java.io.tmpdir"/>
+	<defaultCache
+		timeToLiveSeconds="1"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="shortTimeQueryCache"
+		timeToLiveSeconds="1"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="medsOnCue"
+		timeToLiveSeconds="1"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="cdcRssFeed"
+		timeToLiveSeconds="1"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="categoriesByParentCategory"
+		timeToLiveSeconds="1"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+
+
+	<!-- These caches are for objects that are reading files off disk, which won't change. That's why the caches are eternal. -->
+	<cache
+		name="yamlObjects"
+		eternal="true"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="yamlListObjects"
+		eternal="true"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" /> 
+
+</ehcache>

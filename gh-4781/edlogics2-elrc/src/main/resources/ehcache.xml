@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="ehcache.xsd"
+		updateCheck="false" monitoring="autodetect"
+		dynamicConfig="false" maxBytesLocalHeap="300M">
+	<!-- Property values at http://ehcache.org/ehcache.xml -->
+	<diskStore path="java.io.tmpdir"/>
+	<defaultCache
+		timeToLiveSeconds="86400"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="shortTimeQueryCache"
+		timeToLiveSeconds="3600"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="medsOnCue"
+		timeToLiveSeconds="86280"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="cdcRssFeed"
+		timeToLiveSeconds="86400"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="categoriesByParentCategory"
+		timeToLiveSeconds="3600"
+		eternal="false"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+
+
+	<!-- These caches are for objects that are reading files off disk, which won't change. That's why the caches are eternal. -->
+	<cache
+		name="yamlObjects"
+		eternal="true"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache
+		name="yamlListObjects"
+		eternal="true"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+
+	<!-- Hand-wired caches for swagger (per springfox issue resolution!)  -->
+    <cache name="models"
+        overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+        timeToLiveSeconds="300" memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="modelProperties"
+        overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+        timeToLiveSeconds="300" memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="modelDependencies"
+        overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+        timeToLiveSeconds="300" memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="operations"
+        overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+        timeToLiveSeconds="300" memoryStoreEvictionPolicy="LRU" />
+
+</ehcache>

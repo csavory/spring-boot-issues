@@ -1,0 +1,150 @@
+resources:
+  projectroot:
+spring:
+  application:
+    name: EdLogics Platform
+  messages:
+    basename: messages/messages
+    encoding: UTF-8
+    reloadable: false
+    cache-seconds: 60
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    cache: true
+    encoding: UTF-8
+  datasource:
+    initial-size: 10
+    max-active: 100
+    max-idle: 50
+    min-idle: 10
+    max-wait: 10000
+    remove-abandoned-timeout: 3600
+    min-evictable-idle-time-millis: 30000
+    time-between-eviction-runs-millis: 30000
+    test-on-borrow: false
+    test-on-return: false
+    jmx-enabled: true
+    test-while-idle: false
+    validation-query: SELECT 1
+    validation-interval: 30000
+    log-abandoned: true
+    remove-abandoned: true
+    jdbc-interceptors: org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer
+  jpa:
+    database: HSQL
+    show-sql: false
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: create-drop
+    database-platform: com.edlogics.common.hibernate.HSQLCustomDialect
+    properties:
+      org.hibernate.envers.revision_type_field_name: rev_type
+      hibernate.jdbc.batch_size: 100
+      hibernate.order_inserts: true
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: true
+      hibernate.generate_statistics: true
+      hibernate.cache.use_structured_entries: true
+      hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+      javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
+  mobile:
+    devicedelegatingviewresolver:
+      enabled: true
+  jackson:
+    date-time-format: yyyy-MM-dd'T'hh:mm:ssZ
+    serialization:
+      write-dates-as-timestamps: false
+  resources:
+    cache-period: 3600
+  fingerprinted-resources:
+    enabled: true
+    cache-period: 315360000
+  cache:
+    ehcache:
+      config:
+        
+flyway:
+  enabled: false
+  init-on-migrate: true
+  locations: db/migration/common
+  out-of-order: true
+info:
+  build:
+    artifact: @project.artifactId@
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+app:
+  timezone: America/New_York
+  content:
+    dir: content
+  version: de4db33f
+  swagger: true
+endpoints:
+  metrics:
+    enabled: true
+  metrics-ehcache:
+    enabled: true
+  metrics-hibernate:
+    enabled: true
+  metrics-hibernate-queries:
+    enabled: true
+  metrics-hibernate-entities:
+    enabled: false
+  metrics-hibernate-second-level-cache:
+    enabled: true
+server:
+  session:
+    timeout: 15
+  compression:
+    enabled: true
+    mime-types:
+      - text/html
+      - text/xml
+      - text/plain
+      - text/css
+      - application/javascript
+      - application/json
+logging:
+  level:
+    ROOT: INFO
+    org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: WARN
+    org.springframework.web.socket.config.WebSocketMessageBrokerStats: WARN
+    org.springframework.boot.actuate.audit.listener.AuditListener: WARN
+    springfox.documentation: WARN
+
+---
+
+spring:
+  profiles: local
+  messages:
+    reloadable: true
+    cache-seconds: 10
+  datasource:
+    url: jdbc:hsqldb:mem:testdb
+    username: sa
+    password:
+    remove-abandoned-timeout: 3600
+  jpa:
+    show-sql: true
+app:
+  api-endpoint:
+    categories-domain: http://localhost:8080
+    questions-domain: http://localhost:8080
+    activities-domain: http://localhost:8080
+  google-analytics-tracking-id: UA-44364519-3
+  media:
+    url-root: //s3.amazonaws.com/elrc-latest
+  resource:
+    url-root: //localhost:8080
+  swagger: true
+  base-url: http://localhost:8080
+server:
+  session:
+    timeout: 1500
+logging:
+  file: logs/elrc.log
+
+
